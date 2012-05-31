@@ -6,6 +6,7 @@ package
 	{
 		[Embed(source="data/numbersBig.png")] protected var ImgBox:Class;
 		public var num: int;
+		
 		public function Digit (X:Number=0, Y:Number=0, value:int=0)
 		{
 			value = value%10;
