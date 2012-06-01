@@ -6,14 +6,27 @@ package
 	{
 		
 		[Embed(source="data/upButton.png")] protected var ButtonImgBox:Class;
+		[Embed(source="data/guessButton.png")] protected var GuessImgBox:Class;
 		
 		public var digiL: Digit;
 		public var digiR: Digit;
 		public var buttons: Array;
+		public var solution: int;
+		public var guesses: uint;
+		public var guessText: FlxText;
+		public var fadeInClue: Boolean;
+		public var fadeOutClue: Boolean;
+		public var clue: FlxText;
 		
 		override public function create():void
 		{
 			FlxG.bgColor = 0xff111111;
+			
+			solution = int(FlxG.random()*100);
+			guesses = 0;
+			
+			fadeInClue = false;
+			fadeOutClue = false;
 			
 			var digiHeight:int = 45;
 			var digiSpacing:int = 16;
@@ -52,7 +65,58 @@ package
 			buttons[3].angle = 180;
 			add(buttons[3]);
 			
+			buttons[4] = new FlxButton(blkSB,buttons[3].y + buttons[3].height + 5, null, guessAlert);
+			buttons[4].loadGraphic(GuessImgBox, true, false, 156, 40);
+			add(buttons[4]);
+			
+			guessText = new FlxText(0, buttons[4].y + buttons[4].height + 5, FlxG.width, "Guesses: " + guesses);
+			guessText.alignment = "center";
+			add(guessText);
+			
+			clue = new FlxText(0, guessText.y + guessText.height, FlxG.width, "No Clue");
+			clue.size = 32;
+			clue.alignment = "center";
+			clue.alpha = 0;
+			add(clue);
+			
 			super.create();
+		}
+		
+		override public function update():void
+		{
+			super.update();
+			if( fadeInClue ) {
+				fade(clue, 0.06);
+				if (clue.alpha == 1) {
+					fadeInClue = false;
+					fadeOutClue = true;
+				}
+			} else if ( fadeOutClue ) {
+				fade(clue, -0.007);
+				if (clue.alpha == 0) {
+					fadeOutClue = false;
+				}
+			}
+		}
+		
+		public function guessAlert(): void
+		{
+			guesses += 1;
+			guessText.text = "Guesses: " + guesses;
+			var guess: int = digiL.num*10 + digiR.num;
+			if( guess == solution) {
+				clue.text = "CORRECT!";
+				clue.color = 0xff00ff00;
+			} else if (guess < solution) {
+				clue.text = "TOO LOW";
+				clue.color = 0xff0000ff;
+			} else {
+				clue.text = "TOO HIGH";
+				clue.color = 0xffff0000;
+			}
+			clue.alpha = 0;
+			fadeInClue = true;
+			buttons[4].status = FlxButton.HIGHLIGHT;
 		}
 		
 		public function lIncrement(): void
@@ -79,14 +143,14 @@ package
 			buttons[3].status = FlxButton.HIGHLIGHT;
 		}
 		
-		override public function update():void
+		public function fade( sprite:FlxSprite, diff:Number): void
 		{
-			super.update();
-		}
-		
-		public function fade( sprite:FlxSprite): void
-		{
-			sprite.alpha -= 0.1;
+			if( diff < 0 && sprite.alpha < -diff )
+				sprite.alpha = 0;
+			else if( diff > 0 && sprite.alpha >= 1 - diff )
+				sprite.alpha = 1;
+			else
+				sprite.alpha += diff;
 		}
 	}
 }

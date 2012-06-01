@@ -4,7 +4,7 @@ package
 
 	public class SubMenuState extends FlxState
 	{
-		var backButton: FlxButton;
+		public var backButton: FlxButton;
 		override public function create():void
 		{
 			backButton = new FlxButton(5, FlxG.height-20-5, "Back", backButtonAlert);
