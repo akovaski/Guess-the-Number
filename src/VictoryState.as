@@ -31,6 +31,8 @@ package
 				comment = "ACE! Incredible luck! Bet for me in Vegas, will ya'?";
 			else if( guesses < 4 )
 				comment = "Wow, you're good!";
+			else if( guesses < 7 )
+				comment = "Not too shabby!";
 			else if( guesses < 10 )
 				comment = "You're getting the hang of this!";
 			else if( guesses < 15 )
@@ -53,6 +55,11 @@ package
 		}
 		
 		public function playAlert(): void
+		{
+			FlxG.fade(0xff111111, 1, toPlayState);
+		}
+		
+		public function toPlayState(): void
 		{
 			FlxG.switchState(new PlayState());
 		}

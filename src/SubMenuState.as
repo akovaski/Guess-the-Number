@@ -7,7 +7,7 @@ package
 		public var backButton: FlxButton;
 		override public function create():void
 		{
-			backButton = new FlxButton(5, FlxG.height-20-5, "Back", backButtonAlert);
+			backButton = new FlxButton(5, FlxG.height-20-5, "Main Menu", backButtonAlert);
 			add(backButton);
 		}
 

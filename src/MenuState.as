@@ -25,6 +25,7 @@ package
 			var akaskiLogo: FlxSprite = new FlxSprite(5, FlxG.height - 45 );
 			akaskiLogo.loadGraphic(AkaskiLogo);
 			add(akaskiLogo);
+			FlxG.camera.flash(0xff000000, 1);
 		}
 
 		override public function update():void
@@ -34,10 +35,20 @@ package
 		
 		private function startButton(): void
 		{
+			FlxG.camera.fade(0xff111111, 1, toPlayState);
+		}
+		
+		private function toPlayState(): void
+		{
 			FlxG.switchState(new PlayState());
 		}
 		
 		private function creditsButton(): void
+		{
+			FlxG.camera.fade(0xff0000000, 1, toCreditsState);
+		}
+		
+		private function toCreditsState(): void
 		{
 			FlxG.switchState(new CreditsState());
 		}

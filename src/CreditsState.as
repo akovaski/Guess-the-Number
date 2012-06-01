@@ -23,6 +23,7 @@ package
 			add(t);
 			
 			super.create();
+			FlxG.flash(0xff000000, 1);
 		}
 
 		override public function update():void

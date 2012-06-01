@@ -23,7 +23,7 @@ package
 		{
 			FlxG.bgColor = 0xff111111;
 			
-			solution = int(FlxG.random()*100);
+			solution = int(Math.random()*100);
 			guesses = 0;
 			
 			fadeInClue = false;
@@ -83,6 +83,8 @@ package
 			start = new Date();
 			
 			super.create();
+			
+			FlxG.camera.flash(0xff111111, 1);
 		}
 		
 		override public function update():void
