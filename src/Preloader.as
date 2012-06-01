@@ -6,6 +6,8 @@ package
 	{
 		public function Preloader()
 		{
+			QuickKong.connectToKong(stage);
+			
 			className = "guessthenumber";
 			super();
 		}

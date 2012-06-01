@@ -14,6 +14,11 @@ package
 		
 		override public function create():void
 		{
+			QuickKong.stats.submit("completed", 1);
+			QuickKong.stats.submit("guesses", guesses);
+			QuickKong.stats.submit("time", time/1000);
+			QuickKong.stats.submit("addguesses", guesses);
+			
 			var t:FlxText;
 			t = new FlxText(0,20,FlxG.width,"Victory!");
 			t.color = 0xff00ff00;
