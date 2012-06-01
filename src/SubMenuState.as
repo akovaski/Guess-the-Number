@@ -4,11 +4,11 @@ package
 
 	public class SubMenuState extends FlxState
 	{
+		var backButton: FlxButton;
 		override public function create():void
 		{
-			var b:FlxButton;
-			b = new FlxButton(5, FlxG.height-20-5, "Back", backButton);
-			add(b);
+			backButton = new FlxButton(5, FlxG.height-20-5, "Back", backButton);
+			add(backButton);
 		}
 
 		override public function update():void

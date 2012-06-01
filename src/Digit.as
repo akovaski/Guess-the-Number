@@ -9,10 +9,10 @@ package
 		
 		public function Digit (X:Number=0, Y:Number=0, value:int=0)
 		{
-			value = value%10;
+			num = value%10;
 			super(X,Y);
 			loadGraphic(ImgBox, true, false, 64, 112);
-			frame = value;
+			frame = num;
 		}
 
 		public function newVal(value:int): void

@@ -8,6 +8,7 @@ package
 		
 		override public function create():void
 		{
+			FlxG.bgColor = 0xff000000;
 			var t:FlxText;
 			t = new FlxText(0,30,FlxG.width,"Guess the Number");
 			t.size = 16;
