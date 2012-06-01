@@ -127,6 +127,8 @@ package
 		
 		public function rIncrement(): void
 		{
+			if( digiR.num == 9 )
+				digiL.increment();
 			digiR.increment();
 			buttons[1].status = FlxButton.HIGHLIGHT;
 		}
@@ -139,6 +141,8 @@ package
 		
 		public function rDecrement(): void
 		{
+			if( digiR.num == 0 )
+				digiL.decrement();
 			digiR.decrement();
 			buttons[3].status = FlxButton.HIGHLIGHT;
 		}
