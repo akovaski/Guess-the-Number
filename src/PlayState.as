@@ -34,25 +34,49 @@ package
 			
 			buttons = new Array();
 			
-			buttons[0] = new FlxButton(digiL.x - 8, digiL.y - 35, null, digiL.increment);
+			buttons[0] = new FlxButton(digiL.x - 8, digiL.y - 35, null, lIncrement);
 			buttons[0].loadGraphic(ButtonImgBox, true, false, 80, 30);
 			add(buttons[0]);
 			
-			buttons[1] = new FlxButton(digiR.x - 8, digiR.y - 35, null, digiR.increment);
+			buttons[1] = new FlxButton(digiR.x - 8, digiR.y - 35, null, rIncrement);
 			buttons[1].loadGraphic(ButtonImgBox, true, false, 80, 30);
 			add(buttons[1]);
 			
-			buttons[2] = new FlxButton(digiL.x - 8, digiL.y + digiL.height + 5, null, digiL.decrement);
+			buttons[2] = new FlxButton(digiL.x - 8, digiL.y + digiL.height + 5, null, lDecrement);
 			buttons[2].loadGraphic(ButtonImgBox, true, false, 80, 30);
 			buttons[2].angle = 180;
 			add(buttons[2]);
 			
-			buttons[3] = new FlxButton(digiR.x - 8, digiR.y + digiR.height + 5, null, digiR.decrement);
+			buttons[3] = new FlxButton(digiR.x - 8, digiR.y + digiR.height + 5, null, rDecrement);
 			buttons[3].loadGraphic(ButtonImgBox, true, false, 80, 30);
 			buttons[3].angle = 180;
 			add(buttons[3]);
 			
 			super.create();
+		}
+		
+		public function lIncrement(): void
+		{
+			digiL.increment();
+			buttons[0].status = FlxButton.HIGHLIGHT;
+		}
+		
+		public function rIncrement(): void
+		{
+			digiR.increment();
+			buttons[1].status = FlxButton.HIGHLIGHT;
+		}
+		
+		public function lDecrement(): void
+		{
+			digiL.decrement();
+			buttons[2].status = FlxButton.HIGHLIGHT;
+		}
+		
+		public function rDecrement(): void
+		{
+			digiR.decrement();
+			buttons[3].status = FlxButton.HIGHLIGHT;
 		}
 		
 		override public function update():void
