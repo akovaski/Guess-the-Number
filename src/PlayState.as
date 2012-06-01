@@ -17,6 +17,7 @@ package
 		public var fadeInClue: Boolean;
 		public var fadeOutClue: Boolean;
 		public var clue: FlxText;
+		public var start: Date;
 		
 		override public function create():void
 		{
@@ -79,6 +80,8 @@ package
 			clue.alpha = 0;
 			add(clue);
 			
+			start = new Date();
+			
 			super.create();
 		}
 		
@@ -99,14 +102,27 @@ package
 			}
 		}
 		
+		public function victoryAlert(): void
+		{
+			FlxG.camera.fade(0xff111111, 1, victoryScreenStart);
+		}
+		
+		public function victoryScreenStart(): void
+		{
+			FlxG.switchState(new VictoryState(guesses, (new Date()).time - start.time));
+		}
+		
 		public function guessAlert(): void
 		{
+			if( clue.text == "CORRECT!" )
+				return;
 			guesses += 1;
 			guessText.text = "Guesses: " + guesses;
 			var guess: int = digiL.num*10 + digiR.num;
 			if( guess == solution) {
 				clue.text = "CORRECT!";
 				clue.color = 0xff00ff00;
+				victoryAlert();
 			} else if (guess < solution) {
 				clue.text = "TOO LOW";
 				clue.color = 0xff0000ff;

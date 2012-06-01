@@ -18,6 +18,11 @@ package
 		
 		protected function backButtonAlert(): void
 		{
+			FlxG.camera.fade(0xff000000, 1, toMenuScreen);
+		}
+		
+		protected function toMenuScreen(): void
+		{
 			FlxG.switchState(new MenuState());
 		}
 	}
