@@ -10,6 +10,8 @@ package
 		{
 			guesses = t_guesses;
 			time = t_time;
+			Reg.totalGuesses += guesses;
+			Reg.save();
 		}
 		
 		override public function create():void
@@ -18,6 +20,7 @@ package
 			QuickKong.stats.submit("guesses", guesses);
 			QuickKong.stats.submit("time", time/1000);
 			QuickKong.stats.submit("addguesses", guesses);
+			QuickKong.stats.submit("saveguesses", Reg.totalGuesses);
 			
 			var t:FlxText;
 			t = new FlxText(0,20,FlxG.width,"Victory!");
@@ -54,6 +57,11 @@ package
 			
 			var replay: FlxButton = new FlxButton( FlxG.width/2 - 40, 190, "Replay", playAlert);
 			add(replay);
+			
+			t = new FlxText(0, 235, FlxG.width, "You have taken a total of " + Reg.totalGuesses + " guesses.");
+			t.size = 16;
+			t.alignment = "center";
+			add(t);
 			
 			super.create();
 			FlxG.camera.flash(0xff111111, 1);

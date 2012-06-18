@@ -26,6 +26,8 @@ package
 			akaskiLogo.loadGraphic(AkaskiLogo);
 			add(akaskiLogo);
 			FlxG.camera.flash(0xff000000, 1);
+			
+			Reg.initShare();
 		}
 
 		override public function update():void
